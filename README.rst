@@ -3,8 +3,8 @@ Overview
 
 It can often be more convenient to use the ORM's ``get_or_create`` and
 ``update_or_create`` methods to load data than traditional fixtures, which
-include hard coded primary keys or can only be used with models that support
-natural keys, and don't support dynamic or conditional data.
+include hard coded primary keys or require models that support natural keys, and
+don't support dynamic or conditional data.
 
 This app provides a management command that loads the named "ORM fixtures" for
 each installed app. If no fixtures are named, the labels for all installed apps
@@ -27,8 +27,9 @@ Fixture definition
 An ORM fixture is just a function located in the ``orm_fixtures`` module of an
 installed app.
 
-It should accept ``**kwargs``, as the arguments sent fixtures might change. At
-the moment, the only argument that gets passed is ``verbosity``.
+Fixture function signatures should accept ``**kwargs``, as the arguments sent to
+fixtures might change in the future. At the moment, the only argument that gets
+passed is ``verbosity``, with a default value of ``1``.
 
 Use the ``require_fixtures`` decorator to ensure that one fixture is loaded
 before another::
