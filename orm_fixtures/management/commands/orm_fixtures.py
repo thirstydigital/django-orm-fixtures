@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 from importlib import import_module
 
 class Command(BaseCommand):
 	help = 'Loads the named fixtures, or the default for each installed app.'
 	args = "[fixture ...]"
 
+	@transaction.atomic
 	def handle(self, *fixtures, **options):
 		verbosity = int(options.get('verbosity', 1))
 		delayed = {}
