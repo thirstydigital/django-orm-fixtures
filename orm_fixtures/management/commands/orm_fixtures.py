@@ -42,12 +42,12 @@ class Command(BaseCommand):
 
 				# Ensure fixture has a list of requirements, even if empty.
 				if not hasattr(func, 'requires'):
-					func.requires = []
+					func._requires = []
 
 				# Get full fixture name.
 				fixture = '%s.%s' % (app_label, fixture)
 
-				if loaded.issuperset(func.requires):
+				if loaded.issuperset(func._requires):
 					# Execute if required fixtures are loaded.
 					load(fixture, func, verbosity)
 					loaded.add(fixture)
@@ -59,7 +59,7 @@ class Command(BaseCommand):
 		while delayed:
 			circular = True
 			for fixture, func in delayed.items():
-				if loaded.issuperset(func.requires):
+				if loaded.issuperset(func._requires):
 					load(fixture, func, verbosity)
 					loaded.add(fixture)
 					circular = False
