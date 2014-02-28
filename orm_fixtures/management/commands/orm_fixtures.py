@@ -36,8 +36,10 @@ class Command(BaseCommand):
 
 				func = getattr(orm_fixtures, fixture, None)
 
-				# Continue if fixture doesn't exist.
-				if not func:
+				# Continue if `func` isn't callable, is private, or is defined
+				# in a module other than `orm_fixtures`.
+				if not callable(func) or func.__name__.startswith('_') or \
+						func.__module__ != orm_fixtures.__name__:
 					continue
 
 				# Ensure fixture has a list of requirements, even if empty.
