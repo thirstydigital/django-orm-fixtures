@@ -3,11 +3,16 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from importlib import import_module
 
+try:
+    from django.db.transaction import atomic
+except ImportError:
+    from django.db.transaction import commit_on_success as atomic
+
 class Command(BaseCommand):
 	help = 'Loads the named fixtures, or the default for each installed app.'
 	args = "[fixture ...]"
 
-	@transaction.atomic
+	@atomic
 	def handle(self, *fixtures, **options):
 		verbosity = int(options.get('verbosity', 1))
 		delayed = {}
