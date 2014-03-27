@@ -34,12 +34,12 @@ passed is ``verbosity``, with a default value of ``1``.
 Use the ``require_fixtures`` decorator to ensure that one fixture is loaded
 before another::
 
-	from __future__ import absolute_import
-	from orm_fixtures.decorators import require_fixtures
+    from __future__ import absolute_import
+    from orm_fixtures.decorators import require_fixtures
 
-	@require_fixtures('app.foo', 'app.bar')
-	def myapp(**kwargs):
-		pass
+    @require_fixtures('app.foo', 'app.bar')
+    def myapp(**kwargs):
+        pass
 
 If you want a fixture to load automatically when the ``orm_fixtures`` management
 command is run, give it the same name as an installed app label.
@@ -50,14 +50,14 @@ Usage
 
 Load all fixtures with a name matching any installed app::
 
-	./manage.py orm_fixtures
+    ./manage.py orm_fixtures
 
 Load all fixtures named ``initial_data``::
 
-	./manage.py orm_fixtures initial_data
+    ./manage.py orm_fixtures initial_data
 
 Load all fixtures named ``initial_data`` and the ``test_data`` fixture for the
 ``foo`` app::
 
-	./manage.py orm_fixtures initial_data foo.test_data
+    ./manage.py orm_fixtures initial_data foo.test_data
 
