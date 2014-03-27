@@ -21,6 +21,23 @@ Just add ``orm_fixtures`` to your `INSTALLED_APPS` setting, define your fixtures
 and run the ``orm_fixtures`` management command.
 
 
+Usage
+=====
+
+Load all fixtures with a name matching any installed app::
+
+    ./manage.py orm_fixtures
+
+Load all fixtures named ``initial_data``::
+
+    ./manage.py orm_fixtures initial_data
+
+Load all fixtures named ``initial_data`` and the ``test_data`` fixture for the
+``foo`` app::
+
+    ./manage.py orm_fixtures initial_data foo.test_data
+
+
 Fixture definition
 ==================
 
@@ -43,21 +60,3 @@ before another::
 
 If you want a fixture to load automatically when the ``orm_fixtures`` management
 command is run, give it the same name as an installed app label.
-
-
-Usage
-=====
-
-Load all fixtures with a name matching any installed app::
-
-    ./manage.py orm_fixtures
-
-Load all fixtures named ``initial_data``::
-
-    ./manage.py orm_fixtures initial_data
-
-Load all fixtures named ``initial_data`` and the ``test_data`` fixture for the
-``foo`` app::
-
-    ./manage.py orm_fixtures initial_data foo.test_data
-
